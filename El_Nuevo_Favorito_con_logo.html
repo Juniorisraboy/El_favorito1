@@ -1,0 +1,331 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>El Nuevo Favorito</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Nunito+Sans:wght@400;600;700&display=swap">
+<style>
+/* Concepto: tienda de barrio con voz fuerte. Verde profundo de marca como suelo, dorado como señal de precio y acción. Carrusel grande arriba, tiras de producto que se deslizan debajo. */
+:root{
+  --bg:#F6F7F0; --surface:#FFFFFF; --fg:#10261F; --muted:#4A6058; --line:#D8DECF;
+  --brand:#004030; --gold:#E9C300; --on-brand:#F5F3D6; --on-gold:#2A2300;
+  --price:#004030; --tile-a:#E3EBD9; --tile-b:#F6E9A8; --tile-c:#D5E6E0;
+  --display:'Bricolage Grotesque','Trebuchet MS',system-ui,sans-serif;
+  --body:'Nunito Sans','Segoe UI',system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0B1713; --surface:#12241E; --fg:#EEF2E6; --muted:#A6B8AD; --line:#24382F;
+  --price:#F2D43A; --tile-a:#173229; --tile-b:#3A3410; --tile-c:#15332F; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0B1713; --surface:#12241E; --fg:#EEF2E6; --muted:#A6B8AD; --line:#24382F;
+  --price:#F2D43A; --tile-a:#173229; --tile-b:#3A3410; --tile-c:#15332F; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0}
+h1,h2,h3{font-family:var(--display);line-height:1.08;margin:0;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1120px;margin:0 auto}
+section{scroll-margin-top:84px}
+
+/* header */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--brand);z-index:30}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--brand);color:var(--on-brand);
+  margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px))}
+.bar{max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px}
+.brand{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;text-decoration:none;line-height:1}
+.brand img{display:block;width:auto;height:52px;max-width:min(220px,55vw);object-fit:contain;object-position:left center}
+.brand small{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-top:4px;font-weight:700}
+@media (max-width:760px){.brand img{height:42px;max-width:48vw}}
+.menu{position:relative}
+.menu-btn{display:flex;align-items:center;gap:10px;background:var(--gold);color:var(--on-gold);border:0;border-radius:999px;
+  padding:10px 18px;font:700 .95rem var(--body);cursor:pointer;min-height:44px}
+.menu-btn svg{width:18px;height:18px}
+.menu-list{position:absolute;right:0;top:calc(100% + 10px);min-width:230px;background:var(--surface);color:var(--fg);
+  border:1px solid var(--line);border-radius:14px;padding:8px;box-shadow:0 18px 40px rgba(0,0,0,.28);list-style:none;margin:0}
+.menu-list a{display:block;padding:12px 14px;border-radius:9px;text-decoration:none;font-weight:700}
+.menu-list a:hover,.menu-list a:focus-visible{background:var(--tile-b);outline-offset:-3px}
+
+/* hero carousel */
+.hero{margin-top:20px;position:relative;border-radius:22px;overflow:hidden}
+.track{display:flex;transition:transform .6s cubic-bezier(.3,.7,.2,1)}
+.slide{flex:0 0 100%;min-width:0;padding:clamp(28px,6vw,64px);min-height:clamp(320px,52vw,440px);display:flex;flex-direction:column;justify-content:center;gap:16px;position:relative;overflow:hidden}
+.slide h1,.slide h2{font-size:clamp(2rem,6.2vw,4rem);font-weight:800;letter-spacing:-.02em;max-width:15ch}
+.slide p{max-width:44ch;font-size:clamp(1rem,2.2vw,1.2rem)}
+.slide .cta{align-self:flex-start;margin-top:6px;text-decoration:none;font-weight:800;padding:13px 24px;border-radius:999px;min-height:44px;display:inline-flex;align-items:center}
+.s1{background:var(--brand);color:var(--on-brand)}
+.s1 .cta{background:var(--gold);color:var(--on-gold)}
+.s2{background:var(--gold);color:var(--on-gold)}
+.s2 .cta{background:var(--brand);color:var(--on-brand)}
+.s3{background:#0B2A22;color:var(--on-brand)}
+.s3 .cta{background:var(--on-brand);color:var(--brand)}
+.slide .kicker{font-weight:800;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;opacity:.85}
+.ring{position:absolute;right:-90px;bottom:-110px;width:340px;height:340px;border-radius:50%;border:44px solid currentColor;opacity:.1;pointer-events:none}
+.ring.two{right:120px;bottom:-190px;width:200px;height:200px;border-width:26px}
+.arrow{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;border:0;cursor:pointer;
+  background:rgba(255,255,255,.92);color:#10261F;display:grid;place-items:center;z-index:3}
+.arrow svg{width:20px;height:20px}
+.arrow.prev{left:12px}.arrow.next{right:12px}
+.dots{position:absolute;left:0;right:0;bottom:14px;display:flex;justify-content:center;gap:8px;z-index:3}
+.dots button{width:11px;height:11px;border-radius:50%;border:0;padding:0;background:rgba(255,255,255,.55);cursor:pointer}
+.dots button[aria-current="true"]{background:var(--gold);width:28px;border-radius:6px}
+
+/* sections */
+.sec{padding-block:clamp(40px,7vw,72px) 0}
+.sec-head{display:flex;align-items:end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.sec-head h2{font-size:clamp(1.7rem,4vw,2.4rem);font-weight:800;color:var(--brand)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .sec-head h2{color:var(--on-brand)}}
+:root[data-theme="dark"] .sec-head h2{color:var(--on-brand)}
+.sec-head p{color:var(--muted);max-width:52ch}
+
+.strip{margin-bottom:34px}
+.strip-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.strip-top h3{font-size:1.35rem;font-weight:800}
+.nav{display:flex;gap:8px}
+.nav button{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer;display:grid;place-items:center}
+.nav button:hover{background:var(--gold);color:var(--on-gold);border-color:var(--gold)}
+.nav svg{width:18px;height:18px}
+.row{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px;scrollbar-width:thin;overscroll-behavior-x:contain}
+.card{flex:0 0 clamp(158px,42vw,200px);scroll-snap-align:start;background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.tile{aspect-ratio:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:12px;text-align:center}
+.tile b{font-family:var(--display);font-weight:800;font-size:1.3rem;line-height:1.05;text-wrap:balance}
+.tile span{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.t-a .tile,.t-a{--t:var(--tile-a)}.t-b{--t:var(--tile-b)}.t-c{--t:var(--tile-c)}
+.tile{background:var(--t)}
+.info{padding:12px 14px 14px;display:flex;flex-direction:column;gap:2px}
+.info .n{font-weight:700;font-size:.95rem}
+.price{font-family:var(--display);font-weight:800;font-size:1.55rem;color:var(--price);font-variant-numeric:tabular-nums}
+.price small{font-family:var(--body);font-size:.75rem;font-weight:600;color:var(--muted);margin-left:4px}
+.note{color:var(--muted);font-size:.85rem}
+
+/* puntos */
+.puntos{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,56px);align-items:center}
+.loyalty{background:var(--brand);color:var(--on-brand);border-radius:20px;padding:26px;aspect-ratio:1.6/1;max-width:420px;width:100%;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,.18)}
+.loyalty .ring{width:220px;height:220px;border-width:30px;right:-60px;bottom:-80px;color:var(--gold);opacity:.35}
+.loyalty b{font-family:var(--display);font-size:1.6rem;font-weight:800}
+.loyalty small{display:block;color:var(--gold);letter-spacing:.14em;text-transform:uppercase;font-weight:800;font-size:.72rem}
+.stamps{display:flex;gap:8px;position:relative}
+.stamps i{width:30px;height:30px;border-radius:50%;border:2px solid var(--gold);display:block}
+.stamps i.on{background:var(--gold)}
+.steps{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:14px}
+.steps li{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start}
+.steps .i{width:38px;height:38px;border-radius:50%;background:var(--gold);color:var(--on-gold);display:grid;place-items:center;font-family:var(--display);font-weight:800}
+.steps b{display:block}
+.steps span{color:var(--muted)}
+
+/* servicio */
+.serv{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,4vw,40px)}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px}
+.box h3{font-size:1.25rem;margin-bottom:10px;font-weight:800}
+.box dl{margin:0;display:grid;gap:12px}
+.box dt{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--muted)}
+.box dd{margin:2px 0 0;font-weight:600}
+details{border-bottom:1px solid var(--line);padding:12px 0}
+details:last-child{border-bottom:0}
+summary{cursor:pointer;font-weight:700;list-style:none;display:flex;justify-content:space-between;gap:12px;min-height:32px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--display);font-size:1.4rem;color:var(--price)}
+details[open] summary::after{content:"–"}
+details p{margin-top:8px;color:var(--muted)}
+
+footer{margin-top:clamp(44px,8vw,80px);margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding:34px max(16px,env(safe-area-inset-left,0px)) calc(34px + env(safe-area-inset-bottom,0px));background:var(--brand);color:var(--on-brand)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 32px;justify-content:space-between;align-items:end}
+footer b{font-family:var(--display);font-size:1.6rem;font-weight:800;display:block}
+footer span{color:var(--gold);font-weight:700}
+
+@media (max-width:760px){
+  .puntos,.serv{grid-template-columns:minmax(0,1fr)}
+  .arrow{display:none}
+  .slide{padding-bottom:56px}
+}
+@media (prefers-reduced-motion:reduce){.track{transition:none}html{scroll-behavior:auto}}
+</style>
+
+<header>
+  <div class="bar">
+    <a class="brand" href="#inicio" aria-label="El Nuevo Favorito, inicio">
+      <img src="El_fav.png" alt="Logo de El Nuevo Favorito">
+    </a>
+    <nav class="menu" aria-label="Menú principal">
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menuList">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        Menú
+      </button>
+      <ul class="menu-list" id="menuList" hidden>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#productos">Productos</a></li>
+        <li><a href="#puntos">Puntos</a></li>
+        <li><a href="#servicio">Servicio al cliente</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="inicio" aria-label="Inicio">
+    <div class="hero" id="hero" role="region" aria-roledescription="carrusel" aria-label="Novedades de la tienda">
+      <div class="track" id="track">
+        <article class="slide s1">
+          <span class="kicker">Av. Independencia #360, Centro</span>
+          <h1>Somos tu nuevo favorito</h1>
+          <p>Abarrotes, dulcería y desechables en un solo lugar, con atención amable y precios claros.</p>
+          <a class="cta" href="#productos">Ver productos</a>
+          <i class="ring"></i><i class="ring two"></i>
+        </article>
+        <article class="slide s2">
+          <span class="kicker">Para tu casa y tu negocio</span>
+          <h2>Compra como en súper, ahorra como en bodega</h2>
+          <p>Lo de todos los días para tu familia o tu changarro, al mejor precio de La Laguna.</p>
+          <a class="cta" href="#productos">Ver precios</a>
+          <i class="ring"></i>
+        </article>
+        <article class="slide s3">
+          <span class="kicker">Tarjeta de puntos</span>
+          <h2>Compra más, paga menos</h2>
+          <p>Cada compra suma. Junta puntos y úsalos en tu siguiente visita.</p>
+          <a class="cta" href="#puntos">Conocer los puntos</a>
+          <i class="ring two"></i>
+        </article>
+      </div>
+      <button class="arrow prev" id="prev" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button class="arrow next" id="next" aria-label="Siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+      <div class="dots" id="dots"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="productos" aria-label="Productos">
+    <div class="sec-head">
+      <h2>Productos</h2>
+      <p>Desliza cada tira para ver más. Los precios mostrados son de ejemplo y se ajustan al catálogo real de la tienda.</p>
+    </div>
+    <div id="strips"></div>
+  </section>
+
+  <section class="sec" id="puntos" aria-label="Puntos">
+    <div class="puntos">
+      <div>
+        <div class="sec-head" style="margin-bottom:0"><h2>Puntos</h2></div>
+        <p class="note" style="font-size:1.05rem;margin-top:10px">Con la tarjeta de El Nuevo Favorito, tus compras de siempre te regresan beneficios.</p>
+        <ol class="steps">
+          <li><span class="i">1</span><div><b>Pide tu tarjeta en caja</b><span>Es gratis y se activa en el momento.</span></div></li>
+          <li><span class="i">2</span><div><b>Junta puntos con cada compra</b><span>Abarrotes, dulces y desechables suman por igual.</span></div></li>
+          <li><span class="i">3</span><div><b>Úsalos en tu siguiente visita</b><span>Pregunta en caja cuántos puntos llevas.</span></div></li>
+        </ol>
+      </div>
+      <div class="loyalty" aria-label="Ejemplo de tarjeta de puntos">
+        <i class="ring"></i>
+        <div><small>Tarjeta de puntos</small><b>El Nuevo Favorito</b></div>
+        <div class="stamps" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="servicio" aria-label="Servicio al cliente">
+    <div class="sec-head"><h2>Servicio al cliente</h2><p>Estamos cerca para ayudarte con tu compra, tu tarjeta o cualquier duda.</p></div>
+    <div class="serv">
+      <div class="box">
+        <h3>Visítanos</h3>
+        <dl>
+          <div><dt>Dirección</dt><dd>Av. Independencia #360, colonia Centro, La Laguna</dd></div>
+          <div><dt>Atención</dt><dd>Personal amable en piso y en caja, cada día.</dd></div>
+          <div><dt>WhatsApp</dt><dd>Escríbenos por WhatsApp para preguntar por productos y precios.</dd></div>
+        </dl>
+      </div>
+      <div class="box">
+        <h3>Preguntas frecuentes</h3>
+        <details><summary>¿Cómo consigo mi tarjeta de puntos?</summary><p>Pídela en cualquier caja. Te la entregan en el momento.</p></details>
+        <details><summary>¿Venden por mayoreo para mi negocio?</summary><p>Sí. Pregunta por precios de compra en cantidad de abarrotes y desechables.</p></details>
+        <details><summary>¿Qué hago si un producto no me convence?</summary><p>Habla con el personal de caja con tu ticket y te ayudamos.</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><b>El Nuevo Favorito</b><span>Somos tu nuevo favorito</span></div>
+    <div>Av. Independencia #360, Centro · La Laguna</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* ---------- menú desplegable ---------- */
+  var btn=document.getElementById('menuBtn'), list=document.getElementById('menuList');
+  function setMenu(open){list.hidden=!open;btn.setAttribute('aria-expanded',open?'true':'false')}
+  btn.addEventListener('click',function(e){e.stopPropagation();setMenu(list.hidden)});
+  document.addEventListener('click',function(e){if(!list.hidden&&!list.contains(e.target))setMenu(false)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!list.hidden){setMenu(false);btn.focus()}});
+  list.addEventListener('click',function(e){if(e.target.tagName==='A')setMenu(false)});
+
+  /* ---------- carrusel principal ---------- */
+  var track=document.getElementById('track'), slides=track.children, dots=document.getElementById('dots');
+  var i=0, timer=null, n=slides.length;
+  for(var k=0;k<n;k++){(function(k){
+    var b=document.createElement('button');b.setAttribute('aria-label','Ir a la diapositiva '+(k+1));
+    b.addEventListener('click',function(){go(k,true)});dots.appendChild(b)})(k)}
+  function go(to,user){
+    i=(to+n)%n;track.style.transform='translateX(-'+(i*100)+'%)';
+    for(var k=0;k<n;k++){dots.children[k].setAttribute('aria-current',k===i?'true':'false')}
+    if(user)restart();
+  }
+  function restart(){
+    clearInterval(timer);
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    timer=setInterval(function(){go(i+1)},6000);
+  }
+  document.getElementById('prev').addEventListener('click',function(){go(i-1,true)});
+  document.getElementById('next').addEventListener('click',function(){go(i+1,true)});
+  var hero=document.getElementById('hero');
+  hero.addEventListener('mouseenter',function(){clearInterval(timer)});
+  hero.addEventListener('mouseleave',restart);
+  hero.addEventListener('focusin',function(){clearInterval(timer)});
+  var sx=null;
+  hero.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});
+  hero.addEventListener('touchend',function(e){
+    if(sx===null)return;var dx=e.changedTouches[0].clientX-sx;sx=null;
+    if(Math.abs(dx)>40)go(i+(dx<0?1:-1),true)},{passive:true});
+  go(0);restart();
+
+  /* ---------- tiras de productos (precios de ejemplo, MXN) ---------- */
+  var DATA=[
+    {t:'Abarrotes',c:'t-a',p:[
+      ['Arroz','1 kg','Arroz blanco grano largo',28],['Frijol','1 kg','Frijol negro',34],
+      ['Aceite','900 ml','Aceite vegetal',42],['Azúcar','1 kg','Azúcar estándar',30],
+      ['Harina','1 kg','Harina de trigo',24],['Spaghetti','200 g','Pasta para sopa',9],
+      ['Atún','140 g','Atún en agua',19],['Leche','1 L','Leche entera',25]]},
+    {t:'Dulcería',c:'t-b',p:[
+      ['Gomitas','250 g','Gomitas surtidas',38],['Chocolate','barra','Chocolate de leche',18],
+      ['Cacahuates','200 g','Enchilados',22],['Paletas','30 pzs','Paleta de caramelo',55],
+      ['Mazapán','12 pzs','Caja de mazapán',48],['Chicles','caja','Chicle de menta',32],
+      ['Galletas','surtido','Galletas variadas',29],['Tamarindo','10 pzs','Dulce de tamarindo',27]]},
+    {t:'Desechables',c:'t-c',p:[
+      ['Vasos','50 pzs','Vaso del 8 oz',32],['Platos','25 pzs','Plato del 9 pulgadas',29],
+      ['Cucharas','50 pzs','Cuchara mediana',25],['Servilletas','500 pzs','Servilleta blanca',26],
+      ['Bolsas','1 kg','Bolsa camiseta',35],['Charolas','25 pzs','Charola de 1 lb',58],
+      ['Tenedores','50 pzs','Tenedor mediano',25],['Popotes','100 pzs','Popote negro',18]]}
+  ];
+  var arrowL='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>';
+  var arrowR='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>';
+  var host=document.getElementById('strips');
+  DATA.forEach(function(cat){
+    var s=document.createElement('div');s.className='strip';
+    var cards=cat.p.map(function(p){
+      return '<article class="card '+cat.c+'"><div class="tile"><b>'+p[0]+'</b><span>'+p[1]+'</span></div>'+
+        '<div class="info"><span class="n">'+p[2]+'</span><span class="price">$'+p[3]+'<small>MXN</small></span></div></article>';
+    }).join('');
+    s.innerHTML='<div class="strip-top"><h3>'+cat.t+'</h3><div class="nav">'+
+      '<button type="button" aria-label="Ver anteriores de '+cat.t+'">'+arrowL+'</button>'+
+      '<button type="button" aria-label="Ver más de '+cat.t+'">'+arrowR+'</button></div></div>'+
+      '<div class="row" tabindex="0" role="region" aria-label="Productos de '+cat.t+'">'+cards+'</div>';
+    var row=s.querySelector('.row'), bs=s.querySelectorAll('.nav button');
+    function step(){return Math.max(200,row.clientWidth*0.8)}
+    bs[0].addEventListener('click',function(){row.scrollBy({left:-step(),behavior:'smooth'})});
+    bs[1].addEventListener('click',function(){row.scrollBy({left:step(),behavior:'smooth'})});
+    host.appendChild(s);
+  });
+})();
+</script>
+
+</body></html>
